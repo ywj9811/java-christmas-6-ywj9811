@@ -19,14 +19,14 @@ public class BenefitService {
     }
 
 
-    public int getD_dayBenefit() {
-        if (date > 25)
+    public int getD_dayBenefit(int price) {
+        if (date > 25 || price < 10000)
             return 0;
         return 1000+(100*(date-1));
     }
 
-    public int getWeekDayBenefit(List<Menu> menus) {
-        if (WEEKDAY.contains(date)) {
+    public int getWeekDayBenefit(List<Menu> menus, int price) {
+        if (WEEKDAY.contains(date) && price > 10000) {
             return getDeserts(menus);
         }
         return 0;
@@ -42,8 +42,8 @@ public class BenefitService {
         return desertBenefit;
     }
 
-    public int getWeekEndBenefit(List<Menu> menus) {
-        if (WEEKEND.contains(date)) {
+    public int getWeekEndBenefit(List<Menu> menus, int price) {
+        if (WEEKEND.contains(date) && price > 10000) {
             return getMain(menus);
         }
         return 0;
@@ -59,8 +59,8 @@ public class BenefitService {
         return mainBenefit;
     }
 
-    public int getStarDayBenefit() {
-        if (STAR_DAY.contains(date))
+    public int getStarDayBenefit(int price) {
+        if (STAR_DAY.contains(date) && price > 10000)
             return 1000;
         return 0;
     }
