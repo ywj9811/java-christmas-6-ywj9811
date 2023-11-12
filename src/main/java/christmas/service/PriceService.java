@@ -18,6 +18,10 @@ public class PriceService {
         return totalPrice;
     }
 
+
+    public int getTotalPriceAfter(int totalPrice, int totalBenefit) {
+        return totalPrice - totalBenefit;
+    }
 }
 
 

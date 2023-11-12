@@ -1,18 +1,15 @@
 package christmas.service;
 
 import christmas.domain.Menu;
-
 import java.util.List;
-
 import static christmas.domain.constant.Layer.DESERT;
 import static christmas.domain.constant.Layer.MAIN;
 
 public class BenefitService {
-    private final int date;
     private final static List<Integer> WEEKDAY = List.of(1,4,5,6,7,8,11,12,13,14,15,18,19,20,21,22,25,26,27,28,29);
     private final static List<Integer> WEEKEND = List.of(2,3,9,10,16,17,23,24,30,31);
     private final static List<Integer> STAR_DAY = List.of(3,10,17,24,25,31);
-
+    private final int date;
     public BenefitService(int date) {
         this.date = date;
     }
@@ -58,9 +55,15 @@ public class BenefitService {
         return mainBenefit;
     }
 
-    public int starDayBenefit() {
+    public int getStarDayBenefit() {
         if (STAR_DAY.contains(date))
             return 1000;
+        return 0;
+    }
+
+    public int getPresentationBenefit(int price) {
+        if (price >= 120000)
+            return 25000;
         return 0;
     }
 }
