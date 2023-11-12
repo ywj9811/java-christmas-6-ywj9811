@@ -43,16 +43,20 @@ public class ChristmasEventController {
         outputView.badge(badge);
     }
 
-    public int greetingAndInputDate() {
+    public void greeting() {
         outputView.greeting();
-        String s = inputView.visitDate();
+    }
+
+    public int greetingAndInputDate() {
         try {
-            int date = Integer.parseInt(s);
+            String inputDate = inputView.visitDate();
+            int date = changeInteger(inputDate);
             if (date < 1 || date > 31)
                 throw new OutOfRangeException();
             return date;
-        } catch (Exception e) {
-            throw new InvalidTypeException();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return greetingAndInputDate();
         }
     }
 
@@ -96,5 +100,13 @@ public class ChristmasEventController {
         if (sb.isEmpty())
             sb.append(NONE.getMessage());
         return sb.toString();
+    }
+
+    private int changeInteger(String input) {
+        try {
+            return Integer.parseInt(input);
+        }catch (Exception e) {
+            throw new InvalidTypeException();
+        }
     }
 }
