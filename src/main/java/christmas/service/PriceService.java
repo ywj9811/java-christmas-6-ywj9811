@@ -4,13 +4,10 @@ import christmas.domain.Menu;
 
 import java.util.List;
 
-public class CalculateService {
+public class PriceService {
     private final List<Menu> menus;
-    private final int date;
-
-    public CalculateService(List<Menu> menus, int date) {
+    public PriceService(List<Menu> menus) {
         this.menus = menus;
-        this.date = date;
     }
 
     public int getTotalPriceBefore() {
@@ -20,4 +17,7 @@ public class CalculateService {
         }
         return totalPrice;
     }
+
 }
+
+

@@ -1,19 +1,21 @@
 package christmas.domain;
 
+import christmas.domain.constant.Layer;
+
 public class Menu {
-    private final String layer;
+    private final Layer layer;
     private final String name;
     private final int price;
     private final int amount;
 
-    public Menu(String layer, String name, int price, int amount) {
+    public Menu(Layer layer, String name, int price, int amount) {
         this.layer = layer;
         this.name = name;
         this.price = price;
         this.amount = amount;
     }
 
-    public String getLayer() {
+    public Layer getLayer() {
         return layer;
     }
 
