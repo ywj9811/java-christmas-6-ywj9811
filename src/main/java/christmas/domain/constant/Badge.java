@@ -1,7 +1,7 @@
 package christmas.domain.constant;
 
 public enum Badge {
-    START("별"),
+    STAR("별"),
     TREE("트리"),
     SANTA("산타");
 
