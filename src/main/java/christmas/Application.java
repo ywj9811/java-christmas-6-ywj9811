@@ -1,7 +1,18 @@
 package christmas;
 
+import christmas.controller.ChristmasEventController;
+import christmas.domain.Menu;
+
+import java.util.List;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        ChristmasEventController controller = new ChristmasEventController();
+        int date = controller.greetingAndInputDate();
+        List<Menu> menus = controller.inputOrders(date);
+        controller.setServices(menus, date);
+        int totalPriceBefore = controller.totalPriceBefore();
+        controller.getBenefits(menus, date, totalPriceBefore);
+        controller.getResult(totalPriceBefore);
     }
 }
