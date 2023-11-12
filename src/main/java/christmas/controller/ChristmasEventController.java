@@ -1,6 +1,7 @@
 package christmas.controller;
 
 import christmas.domain.Menu;
+import christmas.exception.OutOfRangeException;
 import christmas.service.BenefitService;
 import christmas.service.InputMenuService;
 import christmas.service.PriceService;
@@ -45,6 +46,8 @@ public class ChristmasEventController {
         outputView.greeting();
         String s = inputView.visitDate();
         int date = Integer.parseInt(s);
+        if (date < 1 || date > 31)
+            throw new OutOfRangeException();
         return date;
     }
 
