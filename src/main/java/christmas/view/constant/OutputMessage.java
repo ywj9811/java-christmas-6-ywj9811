@@ -13,7 +13,7 @@ public enum OutputMessage {
     STAR_BENEFIT("특별 할인: "),
     PRESENTATION_BENEFIT("증정 이벤트: "),
     BENEFITS("\n<혜택 내역>"),
-    TOTAL_BENEFIT_PRICE("<총혜택 금액>"),
+    TOTAL_BENEFIT_PRICE("\n<총혜택 금액>"),
     TOTAL_PRICE_AFTER("\n<할인 후 예상 결제 금액>"),
     EVENT_BADGE("\n<12월 이벤트 배지>"),
     NONE("없음")

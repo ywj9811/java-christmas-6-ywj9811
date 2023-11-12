@@ -25,7 +25,7 @@ public class OutputView {
 
     public void totalPriceBefore(String price) {
         System.out.println(TOTAL_PRICE_BEFORE.getMessage());
-        System.out.println(price + "원");
+        System.out.println(price);
     }
 
     public void presentationMenu(int presentation) {
@@ -49,7 +49,7 @@ public class OutputView {
 
     public void totalPriceAfter(String price) {
         System.out.println(TOTAL_PRICE_AFTER.getMessage());
-        System.out.println(price + "원");
+        System.out.println(price);
     }
 
     public void badge(String badge) {
