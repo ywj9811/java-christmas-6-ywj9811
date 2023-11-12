@@ -3,26 +3,42 @@ package christmas.view;
 
 import christmas.domain.Menu;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 import static christmas.view.constant.OutputMessage.*;
 
 public class OutputView {
-    private final static DecimalFormat PRINT_FORMAT = new DecimalFormat("#,##0");
     public void greeting() {
         System.out.println(GREETING.getMessage());
     }
 
+    public void preBenefit(int date) {
+        System.out.println("12월 " + date + PRE_BENEFITS.getMessage());
+    }
+
     public void orderMenus(List<Menu> menus) {
-        System.out.println(ORDERS);
+        System.out.println(ORDERS.getMessage());
         for (Menu menu : menus) {
-            System.out.println(menu.getName() + " " + menu.getAmount()+"개");
+            System.out.println(menu.getName() + " " + menu.getAmount()+ "개");
         }
     }
 
-    public void totalPriceBefore(int price) {
-        System.out.println(TOTAL_PRICE_BEFORE);
-        System.out.println(PRINT_FORMAT.format(price));
+    public void totalPriceBefore(String price) {
+        System.out.println(TOTAL_PRICE_BEFORE.getMessage());
+        System.out.println(price + "원");
+    }
+
+    public void presentationMenu(int presentation) {
+        System.out.println(PRESENTATION_MENU.getMessage());
+        if (presentation > 0) {
+            System.out.println(PRESENTATION_MENU_AMOUNT.getMessage());
+            return;
+        }
+        System.out.println(NONE.getMessage());
+    }
+
+    public void benefitHistory(String history) {
+        System.out.println(BENEFITS.getMessage());
+        System.out.println(history);
     }
 }
