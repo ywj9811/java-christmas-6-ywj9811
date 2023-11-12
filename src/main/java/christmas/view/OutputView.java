@@ -41,4 +41,19 @@ public class OutputView {
         System.out.println(BENEFITS.getMessage());
         System.out.println(history);
     }
+
+    public void totalBenefit(String totalBenefit) {
+        System.out.println(TOTAL_BENEFIT_PRICE.getMessage());
+        System.out.println(totalBenefit);
+    }
+
+    public void totalPriceAfter(String price) {
+        System.out.println(TOTAL_PRICE_AFTER.getMessage());
+        System.out.println(price + "원");
+    }
+
+    public void badge(String badge) {
+        System.out.println(EVENT_BADGE.getMessage());
+        System.out.println(badge);
+    }
 }

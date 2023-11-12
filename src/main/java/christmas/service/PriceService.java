@@ -19,8 +19,8 @@ public class PriceService {
     }
 
 
-    public int getTotalPriceAfter(int totalPrice, int totalBenefit) {
-        return totalPrice - totalBenefit;
+    public int getTotalPriceAfter(int totalPrice, int totalBenefit, int presentationBenefit) {
+        return totalPrice - totalBenefit + presentationBenefit;
     }
 }
 

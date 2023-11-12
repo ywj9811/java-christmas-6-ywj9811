@@ -1,9 +1,13 @@
 package christmas.service;
 
 import christmas.domain.Menu;
+
 import java.util.List;
+
+import static christmas.domain.constant.Badge.*;
 import static christmas.domain.constant.Layer.DESERT;
 import static christmas.domain.constant.Layer.MAIN;
+import static christmas.view.constant.OutputMessage.NONE;
 
 public class BenefitService {
     private final static List<Integer> WEEKDAY = List.of(1,4,5,6,7,8,11,12,13,14,15,18,19,20,21,22,25,26,27,28,29);
@@ -65,5 +69,15 @@ public class BenefitService {
         if (price >= 120000)
             return 25000;
         return 0;
+    }
+
+    public String getBadge(int totalPrice) {
+        if (totalPrice > 20000)
+            return SANTA.getMessage();
+        if (totalPrice > 10000)
+            return TREE.getMessage();
+        if (totalPrice > 5000)
+            return STAR.getMessage();
+        return NONE.getMessage();
     }
 }

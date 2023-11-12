@@ -10,7 +10,7 @@ public enum MenuInfo {
     RIB(MAIN,"바비큐립",54000),
     OCEAN_PASTA(MAIN,"해산물파스타",35000),
     CHRISTMAS_PASTA(MAIN,"크리스마스파스타",25000),
-    CAKE(DESERT, "초코케이크",5000),
+    CAKE(DESERT, "초코케이크",15000),
     ICE_CREAM(DESERT,"아이스크림",5000),
     COLA(BEVERAGE, "제로콜라",3000),
     WINE(BEVERAGE,"레드와인",60000),
