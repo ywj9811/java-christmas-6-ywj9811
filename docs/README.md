@@ -73,8 +73,8 @@
     - [x] 중복된 메뉴를 입력하는 경우 `[ERROR]~~`와 함께 `IllegalArgumentException` 발생
   - [x] e.g. 해산물파스타-2,레드와인-1,초코케이크-1 이러한 형식 유지
     - [x] 이외의 형식의 경우 `[ERROR]~~`와 함께 `IllegalArgumentException` 발생
-  - [ ] 음료만 주문하는 경우 `[ERROR]~~`와 함께 `IllegalArgumentException` 발생
-  - [ ] 메뉴는 한 번에 최대 20개까지만 주문할 수 있음 넘어가는 경우 `[ERROR]~~`와 함께 `IllegalArgumentException` 발생
+  - [x] 음료만 주문하는 경우 `[ERROR]~~`와 함께 `IllegalArgumentException` 발생
+  - [x] 메뉴는 한 번에 최대 20개까지만 주문할 수 있음 넘어가는 경우 `[ERROR]~~`와 함께 `IllegalArgumentException` 발생
 - [x] 주문 메뉴 출력
   - [x] 순서 상관 없음
   - [x] 10000원 이상 주문시 이벤트 적용
