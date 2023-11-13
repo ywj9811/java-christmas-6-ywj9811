@@ -79,7 +79,7 @@ public class ChristmasEventController {
         return totalPriceBefore;
     }
 
-    public void getBenefits(List<Menu> menus, int date, int totalPriceBefore) {
+    public void getBenefits(List<Menu> menus, int totalPriceBefore) {
         benefits[PRESENTATION.getColumn()] = benefitService.getPresentationBenefit(totalPriceBefore);
         benefits[D_DAY.getColumn()] = benefitService.getD_dayBenefit(totalPriceBefore);
         benefits[WEEKDAY.getColumn()] = benefitService.getWeekDayBenefit(menus, totalPriceBefore);
