@@ -13,7 +13,7 @@ public class Application {
         List<Menu> menus = controller.inputOrders(date);
         controller.setServices(menus, date);
         int totalPriceBefore = controller.totalPriceBefore();
-        controller.getBenefits(menus, date, totalPriceBefore);
+        controller.getBenefits(menus, totalPriceBefore);
         controller.getResult(totalPriceBefore);
     }
 }
