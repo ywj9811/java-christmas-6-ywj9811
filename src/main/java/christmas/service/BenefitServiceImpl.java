@@ -22,6 +22,13 @@ public class BenefitServiceImpl implements BenefitService {
         return instance;
     }
 
+    /**
+     * 테스트코드용 싱글톤 해제
+     */
+    public static BenefitService reset(int date) {
+        return new BenefitServiceImpl(date);
+    }
+
     @Override
     public int getD_dayBenefit(int price) {
         if (date > CHRISTMAS.getNumber() || price < MIN_PRICE.getNumber())
@@ -75,11 +82,11 @@ public class BenefitServiceImpl implements BenefitService {
 
     @Override
     public String getBadge(int totalPrice) {
-        if (totalPrice > PRESENTATION_MAX.getNumber())
+        if (totalPrice >= PRESENTATION_MAX.getNumber())
             return SANTA.getMessage();
-        if (totalPrice > PRESENTATION_MED.getNumber())
+        if (totalPrice >= PRESENTATION_MED.getNumber())
             return TREE.getMessage();
-        if (totalPrice > PRESENTATION_MIN.getNumber())
+        if (totalPrice >= PRESENTATION_MIN.getNumber())
             return STAR.getMessage();
         return NONE.getMessage();
     }
