@@ -4,6 +4,7 @@ import christmas.domain.OrderMenus;
 
 import static christmas.domain.constant.Badge.*;
 import static christmas.domain.constant.BenefitDay.*;
+import static christmas.domain.constant.Number.*;
 import static christmas.view.constant.OutputMessage.NONE;
 
 public class BenefitService {
@@ -14,14 +15,15 @@ public class BenefitService {
 
 
     public int getD_dayBenefit(int price) {
-        if (date > 25 || price < 10000)
+        if (date > CHRISTMAS.getNumber() || price < MIN_PRICE.getNumber())
             return 0;
-        return 1000+(100*(date-1));
+        return BENEFIT_DATE_START.getNumber()
+                +(BENEFIT_DATE_UNIT.getNumber()*(date-1));
     }
 
     public int getWeekDayBenefit(OrderMenus menus, int price) {
         if (WEEK_DAY.getDays().contains(date)
-                && price > 10000) {
+                && price > MIN_PRICE.getNumber()) {
             return getDeserts(menus);
         }
         return 0;
@@ -29,12 +31,12 @@ public class BenefitService {
 
     private int getDeserts(OrderMenus menus) {
         int desertAmount = menus.getDesertAmount();
-        return desertAmount*2023;
+        return desertAmount * BENEFIT_PRICE_UNIT.getNumber();
     }
 
     public int getWeekEndBenefit(OrderMenus menus, int price) {
         if (WEEK_END.getDays().contains(date)
-                && price > 10000) {
+                && price > MIN_PRICE.getNumber()) {
             return getMain(menus);
         }
         return 0;
@@ -42,28 +44,28 @@ public class BenefitService {
 
     private int getMain(OrderMenus menus) {
         int mainAmount = menus.getMainAmount();
-        return mainAmount*2023;
+        return mainAmount* BENEFIT_PRICE_UNIT.getNumber();
     }
 
     public int getStarDayBenefit(int price) {
         if (STAR_DAY.getDays().contains(date)
-                && price > 10000)
-            return 1000;
+                && price > MIN_PRICE.getNumber())
+            return BENEFIT_DATE_START.getNumber();
         return 0;
     }
 
     public int getPresentationBenefit(int price) {
-        if (price >= 120000)
-            return 25000;
+        if (price >= MIN_PRESENTATION_PRICE.getNumber())
+            return PRESENTATION_PRICE.getNumber();
         return 0;
     }
 
     public String getBadge(int totalPrice) {
-        if (totalPrice > 20000)
+        if (totalPrice > PRESENTATION_MAX.getNumber())
             return SANTA.getMessage();
-        if (totalPrice > 10000)
+        if (totalPrice > PRESENTATION_MED.getNumber())
             return TREE.getMessage();
-        if (totalPrice > 5000)
+        if (totalPrice > PRESENTATION_MIN.getNumber())
             return STAR.getMessage();
         return NONE.getMessage();
     }
