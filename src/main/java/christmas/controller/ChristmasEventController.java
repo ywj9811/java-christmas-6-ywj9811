@@ -63,8 +63,8 @@ public class ChristmasEventController {
     public List<Menu> inputOrders(int date) {
         try {
             String orders = inputView.getOrders();
-            outputView.preBenefit(date);
             List<Menu> menus = inputMenuService.getInputMenus(orders);
+            outputView.preBenefit(date);
             outputView.orderMenus(menus);
             return menus;
         } catch (IllegalArgumentException e) {
