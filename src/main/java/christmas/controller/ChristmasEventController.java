@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.domain.Menu;
 import christmas.domain.OrderMenus;
 import christmas.service.BenefitService;
 import christmas.service.InputMenuService;
@@ -10,7 +11,6 @@ import christmas.view.OutputView;
 import static christmas.domain.constant.Benefit.*;
 import static christmas.util.Conversion.conversionDate;
 import static christmas.view.constant.OutputFormat.*;
-import static christmas.view.constant.OutputMessage.*;
 
 public class ChristmasEventController {
     private final OutputView outputView = new OutputView();
@@ -27,9 +27,8 @@ public class ChristmasEventController {
 
     public void getResult() {
         int totalBenefits = 0;
-        for (int benefitPrice : benefits) {
+        for (int benefitPrice : benefits)
             totalBenefits += benefitPrice;
-        }
 
         int totalPriceAfter = priceService.getTotalPriceAfter(totalBenefits, benefits[PRESENTATION.getColumn()]);
         outputView.totalBenefit(benefitFormatter(totalBenefits));
@@ -58,8 +57,10 @@ public class ChristmasEventController {
         try {
             String orders = inputView.getOrders();
             OrderMenus menus = inputMenuService.getInputMenus(orders);
-            outputView.preBenefit(date);
-            outputView.orderMenus(menus);
+            outputView.preBenefit(preBenefitFormatter(date));
+            outputView.orderMenus();
+            for (Menu menu : menus.getMenus())
+                outputView.totalMenus(orderMenusFormatter(menu));
             return menus;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -79,25 +80,8 @@ public class ChristmasEventController {
         benefits[WEEKDAY.getColumn()] = benefitService.getWeekDayBenefit(menus, totalPriceBefore);
         benefits[WEEKEND.getColumn()] = benefitService.getWeekEndBenefit(menus, totalPriceBefore);
         benefits[STAR_DAY.getColumn()] = benefitService.getStarDayBenefit(totalPriceBefore);
-        String benefit = makeBenefit(benefits);
+        String benefit = benefitHistoryFormatter(benefits);
         outputView.presentationMenu(benefits[PRESENTATION.getColumn()]);
         outputView.benefitHistory(benefit);
-    }
-
-    private String makeBenefit(int[] benefits) {
-        StringBuilder sb = new StringBuilder();
-        if (benefits[D_DAY.getColumn()] > 0)
-            sb.append(CHRISTMAS_BENEFIT.getMessage() + minusFormatter(benefits[D_DAY.getColumn()]));
-        if (benefits[WEEKDAY.getColumn()] > 0)
-            sb.append(WEEKDAY_BENEFIT.getMessage() + minusFormatter(benefits[WEEKDAY.getColumn()]));
-        if (benefits[WEEKEND.getColumn()] > 0)
-            sb.append(WEEKEND_BENEFIT.getMessage() + minusFormatter(benefits[WEEKEND.getColumn()]));
-        if (benefits[STAR_DAY.getColumn()] > 0)
-            sb.append(STAR_BENEFIT.getMessage() + minusFormatter(benefits[STAR_DAY.getColumn()]));
-        if (benefits[PRESENTATION.getColumn()] > 0)
-            sb.append(PRESENTATION_BENEFIT.getMessage() + minusFormatter(benefits[PRESENTATION.getColumn()]));
-        if (sb.isEmpty())
-            sb.append(NONE.getMessage());
-        return sb.toString();
     }
 }

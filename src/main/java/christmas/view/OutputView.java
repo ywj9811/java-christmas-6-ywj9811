@@ -11,15 +11,16 @@ public class OutputView {
         System.out.println(GREETING.getMessage());
     }
 
-    public void preBenefit(int date) {
-        System.out.println("12월 " + date + PRE_BENEFITS.getMessage());
+    public void preBenefit(String message) {
+        System.out.println(message);
     }
 
-    public void orderMenus(OrderMenus menus) {
+    public void orderMenus() {
         System.out.println(ORDERS.getMessage());
-        for (Menu menu : menus.getMenus()) {
-            System.out.println(menu.getName() + " " + menu.getAmount()+ "개");
-        }
+    }
+
+    public void totalMenus(String message) {
+        System.out.println(message);
     }
 
     public void totalPriceBefore(String price) {
