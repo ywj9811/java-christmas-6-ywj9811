@@ -2,15 +2,13 @@ package christmas.service;
 
 import christmas.domain.Menu;
 import christmas.domain.constant.MenuInfo;
+import christmas.exception.InvalidMenuException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class InputMenuService {
     public List<Menu> getInputMenus(String inputMenus) {
-        /**
-         * 티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1
-         */
         List<Menu> menus = new ArrayList<>();
         String[] inputMenuDetails = inputMenus.split(",");
         for (String inputMenu : inputMenuDetails) {
@@ -35,6 +33,6 @@ public class InputMenuService {
             if (menuInfo.getName().equals(name))
                 return menuInfo;
         }
-        return null;
+        throw new InvalidMenuException();
     }
 }

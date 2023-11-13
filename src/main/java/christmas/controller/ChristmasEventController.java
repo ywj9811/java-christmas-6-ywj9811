@@ -61,11 +61,16 @@ public class ChristmasEventController {
     }
 
     public List<Menu> inputOrders(int date) {
-        String orders = inputView.getOrders();
-        outputView.preBenefit(date);
-        List<Menu> menus = inputMenuService.getInputMenus(orders);
-        outputView.orderMenus(menus);
-        return menus;
+        try {
+            String orders = inputView.getOrders();
+            outputView.preBenefit(date);
+            List<Menu> menus = inputMenuService.getInputMenus(orders);
+            outputView.orderMenus(menus);
+            return menus;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputOrders(date);
+        }
     }
 
     public int totalPriceBefore() {
