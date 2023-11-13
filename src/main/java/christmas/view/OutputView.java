@@ -1,7 +1,5 @@
 package christmas.view;
 
-import christmas.service.InputMenuServiceImpl;
-
 import static christmas.view.constant.OutputMessage.*;
 
 public class OutputView {
