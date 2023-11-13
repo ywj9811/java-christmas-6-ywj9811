@@ -2,6 +2,7 @@ package christmas.service;
 
 import christmas.domain.Menu;
 import christmas.domain.constant.MenuInfo;
+import christmas.exception.DuplicatedMenuException;
 import christmas.exception.InvalidFormatException;
 import christmas.exception.InvalidMenuException;
 
@@ -14,6 +15,7 @@ public class InputMenuService {
         String[] inputMenuDetails = inputMenus.split(",");
         for (String inputMenu : inputMenuDetails) {
             Menu menu = getMenu(inputMenu);
+            checkDuplicated(menus, menu);
             menus.add(menu);
         }
         return menus;
@@ -39,5 +41,13 @@ public class InputMenuService {
                 return menuInfo;
         }
         throw new InvalidMenuException();
+    }
+
+    private void checkDuplicated(List<Menu> menus, Menu inputMenu) {
+        for (Menu originMenu : menus) {
+            if (originMenu.getName()
+                    .equals(inputMenu.getName()))
+                throw new DuplicatedMenuException();
+        }
     }
 }
