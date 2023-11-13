@@ -23,14 +23,6 @@ public class InputMenuServiceImpl implements InputMenuService{
     public static InputMenuService getInstance(){
         return InputMenuServiceHelper.INPUT_MENU_SERVICE;
     }
-//
-//    /**
-//     * 테스트시 싱글톤으로 인해 발생하는 문제 해결용 메소드
-//     * 실제 어플리케이션에 사용X *중요*
-//     */
-//    public InputMenuServiceImpl reset() {
-//        return new InputMenuServiceImpl();
-//    }
 
     @Override
     public OrderMenus getInputMenus(String inputMenus) {
