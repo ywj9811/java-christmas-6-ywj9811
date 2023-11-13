@@ -4,13 +4,13 @@ import christmas.domain.OrderMenus;
 
 public class PriceServiceImpl implements PriceService{
     private final OrderMenus menus;
-    private static PriceServiceImpl instance;
+    private static PriceService instance;
 
     private PriceServiceImpl(OrderMenus menus) {
         this.menus = menus;
     }
 
-    public static PriceServiceImpl getInstance(OrderMenus menus) {
+    public static PriceService getInstance(OrderMenus menus) {
         if (instance == null)
             return new PriceServiceImpl(menus);
         return instance;

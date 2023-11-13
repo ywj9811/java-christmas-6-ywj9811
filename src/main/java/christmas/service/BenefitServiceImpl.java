@@ -9,12 +9,13 @@ import static christmas.view.constant.OutputMessage.NONE;
 
 public class BenefitServiceImpl implements BenefitService {
     private final int date;
-    private static BenefitServiceImpl instance;
+    private static BenefitService instance;
 
     private BenefitServiceImpl(int date) {
         this.date = date;
     }
-    public static BenefitServiceImpl getInstance(int date) {
+
+    public static BenefitService getInstance(int date) {
         if (instance == null) {
             instance = new BenefitServiceImpl(date);
         }
