@@ -9,8 +9,16 @@ import static christmas.view.constant.OutputMessage.NONE;
 
 public class BenefitService {
     private final int date;
-    public BenefitService(int date) {
+    private static BenefitService instance;
+
+    private BenefitService(int date) {
         this.date = date;
+    }
+    public static BenefitService getInstance(int date) {
+        if (instance == null) {
+            instance = new BenefitService(date);
+        }
+        return instance;
     }
 
 

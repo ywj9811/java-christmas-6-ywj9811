@@ -15,14 +15,14 @@ import static christmas.view.constant.OutputFormat.*;
 public class ChristmasEventController {
     private final OutputView outputView = new OutputView();
     private final InputView inputView = new InputView();
-    private final InputMenuService inputMenuService = new InputMenuService();
+    private final InputMenuService inputMenuService = InputMenuService.getInstance();
     private final int[] benefits = new int[5];
     private PriceService priceService;
     private BenefitService benefitService;
 
     public void setServices(OrderMenus menus, int date) {
-        priceService = new PriceService(menus);
-        benefitService = new BenefitService(date);
+        priceService = PriceService.getInstance(menus);
+        benefitService = BenefitService.getInstance(date);
     }
 
     public void getResult() {

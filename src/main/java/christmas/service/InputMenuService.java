@@ -14,6 +14,17 @@ public class InputMenuService {
     private static final String COMMA = ",";
     private static final String DASH = "-";
 
+    private InputMenuService() {}
+
+    private static class InputMenuServiceHelper {
+        private static final InputMenuService INPUT_MENU_SERVICE = new InputMenuService();
+    }
+
+    public static InputMenuService getInstance(){
+        return InputMenuServiceHelper.INPUT_MENU_SERVICE;
+    }
+
+
     public OrderMenus getInputMenus(String inputMenus) {
         List<Menu> menus = new ArrayList<>();
         String[] inputMenuDetails = inputMenus.split(COMMA);

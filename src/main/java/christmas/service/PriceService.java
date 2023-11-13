@@ -4,8 +4,16 @@ import christmas.domain.OrderMenus;
 
 public class PriceService {
     private final OrderMenus menus;
-    public PriceService(OrderMenus menus) {
+    private static PriceService instance;
+
+    private PriceService(OrderMenus menus) {
         this.menus = menus;
+    }
+
+    public static PriceService getInstance(OrderMenus menus) {
+        if (instance == null)
+            return new PriceService(menus);
+        return instance;
     }
 
     public int getTotalPriceBefore() {

@@ -1,7 +1,6 @@
 package christmas.view.constant;
 
 import christmas.domain.Menu;
-import christmas.domain.OrderMenus;
 
 import java.text.DecimalFormat;
 
