@@ -2,6 +2,7 @@ package christmas.service;
 
 import christmas.domain.Menu;
 import christmas.domain.constant.MenuInfo;
+import christmas.exception.InvalidFormatException;
 import christmas.exception.InvalidMenuException;
 
 import java.util.ArrayList;
@@ -19,12 +20,16 @@ public class InputMenuService {
     }
 
     private Menu getMenu(String inputMenu) {
-        String[] menuDetails = inputMenu.split("-");
-        String name = menuDetails[0];
-        int amount = Integer.parseInt(menuDetails[1]);
-        MenuInfo menuInfo = getMenuInfo(name);
-        Menu menu = new Menu(menuInfo.getLayer(), menuInfo.getName(), menuInfo.getPrice(), amount);
-        return menu;
+        try {
+            String[] menuDetails = inputMenu.split("-");
+            String name = menuDetails[0];
+            int amount = Integer.parseInt(menuDetails[1]);
+            MenuInfo menuInfo = getMenuInfo(name);
+            Menu menu = new Menu(menuInfo.getLayer(), menuInfo.getName(), menuInfo.getPrice(), amount);
+            return menu;
+        } catch (Exception e) {
+            throw new InvalidFormatException();
+        }
     }
 
     private MenuInfo getMenuInfo(String name) {
