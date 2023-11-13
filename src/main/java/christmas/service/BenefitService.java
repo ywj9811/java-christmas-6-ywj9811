@@ -1,6 +1,7 @@
 package christmas.service;
 
 import christmas.domain.Menu;
+import christmas.domain.OrderMenus;
 
 import java.util.List;
 
@@ -25,38 +26,28 @@ public class BenefitService {
         return 1000+(100*(date-1));
     }
 
-    public int getWeekDayBenefit(List<Menu> menus, int price) {
+    public int getWeekDayBenefit(OrderMenus menus, int price) {
         if (WEEKDAY.contains(date) && price > 10000) {
             return getDeserts(menus);
         }
         return 0;
     }
 
-    private int getDeserts(List<Menu> menus) {
-        int desertBenefit = 0;
-        for (Menu menu : menus) {
-            if (menu.getLayer().equals(DESERT)) {
-                desertBenefit += 2023*menu.getAmount();
-            }
-        }
-        return desertBenefit;
+    private int getDeserts(OrderMenus menus) {
+        int desertAmount = menus.getDesertAmount();
+        return desertAmount*2023;
     }
 
-    public int getWeekEndBenefit(List<Menu> menus, int price) {
+    public int getWeekEndBenefit(OrderMenus menus, int price) {
         if (WEEKEND.contains(date) && price > 10000) {
             return getMain(menus);
         }
         return 0;
     }
 
-    private int getMain(List<Menu> menus) {
-        int mainBenefit = 0;
-        for (Menu menu : menus) {
-            if (menu.getLayer().equals(MAIN)) {
-                mainBenefit += 2023*menu.getAmount();
-            }
-        }
-        return mainBenefit;
+    private int getMain(OrderMenus menus) {
+        int mainAmount = menus.getMainAmount();
+        return mainAmount*2023;
     }
 
     public int getStarDayBenefit(int price) {
