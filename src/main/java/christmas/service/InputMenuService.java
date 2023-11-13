@@ -11,9 +11,12 @@ import java.util.List;
 import static christmas.util.Conversion.conversionAmount;
 
 public class InputMenuService {
+    private static final String COMMA = ",";
+    private static final String DASH = "-";
+
     public OrderMenus getInputMenus(String inputMenus) {
         List<Menu> menus = new ArrayList<>();
-        String[] inputMenuDetails = inputMenus.split(",");
+        String[] inputMenuDetails = inputMenus.split(COMMA);
         for (String inputMenu : inputMenuDetails) {
             Menu menu = getMenu(inputMenu);
             menus.add(menu);
@@ -22,7 +25,7 @@ public class InputMenuService {
     }
 
     private Menu getMenu(String inputMenu) {
-        String[] menuDetails = inputMenu.split("-");
+        String[] menuDetails = inputMenu.split(DASH);
         String name = menuDetails[0];
         int amount = conversionAmount(menuDetails[1]);
         MenuInfo menuInfo = getMenuInfo(name);
