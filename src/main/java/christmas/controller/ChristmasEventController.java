@@ -2,9 +2,7 @@ package christmas.controller;
 
 import christmas.domain.Menu;
 import christmas.domain.OrderMenus;
-import christmas.service.BenefitService;
-import christmas.service.InputMenuService;
-import christmas.service.PriceService;
+import christmas.service.*;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -13,29 +11,16 @@ import static christmas.util.Conversion.conversionDate;
 import static christmas.view.constant.OutputFormat.*;
 
 public class ChristmasEventController {
-    private final OutputView outputView = new OutputView();
-    private final InputView inputView = new InputView();
-    private final InputMenuService inputMenuService = InputMenuService.getInstance();
+    private final OutputView outputView = OutputView.getInstance();
+    private final InputView inputView = InputView.getInstance();
+    private final InputMenuService inputMenuService = InputMenuServiceImpl.getInstance();
     private final int[] benefits = new int[5];
     private PriceService priceService;
     private BenefitService benefitService;
 
     public void setServices(OrderMenus menus, int date) {
-        priceService = PriceService.getInstance(menus);
-        benefitService = BenefitService.getInstance(date);
-    }
-
-    public void getResult() {
-        int totalBenefits = 0;
-        for (int benefitPrice : benefits)
-            totalBenefits += benefitPrice;
-
-        int totalPriceAfter = priceService.getTotalPriceAfter(totalBenefits, benefits[PRESENTATION.getColumn()]);
-        outputView.totalBenefit(benefitFormatter(totalBenefits));
-        outputView.totalPriceAfter(priceFormatter(totalPriceAfter));
-
-        String badge = benefitService.getBadge(totalBenefits);
-        outputView.badge(badge);
+        priceService = PriceServiceImpl.getInstance(menus);
+        benefitService = BenefitServiceImpl.getInstance(date);
     }
 
     public void greeting() {
@@ -83,5 +68,18 @@ public class ChristmasEventController {
         String benefit = benefitHistoryFormatter(benefits);
         outputView.presentationMenu(benefits[PRESENTATION.getColumn()]);
         outputView.benefitHistory(benefit);
+    }
+
+    public void getResult() {
+        int totalBenefits = 0;
+        for (int benefitPrice : benefits)
+            totalBenefits += benefitPrice;
+
+        int totalPriceAfter = priceService.getTotalPriceAfter(totalBenefits, benefits[PRESENTATION.getColumn()]);
+        outputView.totalBenefit(benefitFormatter(totalBenefits));
+        outputView.totalPriceAfter(priceFormatter(totalPriceAfter));
+
+        String badge = benefitService.getBadge(totalBenefits);
+        outputView.badge(badge);
     }
 }
