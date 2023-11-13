@@ -2,15 +2,11 @@ package christmas.service;
 
 import christmas.domain.OrderMenus;
 
-import java.util.List;
-
 import static christmas.domain.constant.Badge.*;
+import static christmas.domain.constant.BenefitDay.*;
 import static christmas.view.constant.OutputMessage.NONE;
 
 public class BenefitService {
-    private final static List<Integer> WEEKDAY = List.of(3,4,5,6,7,10,11,12,13,14,17,18,19,20,21,24,25,26,27,28,31);
-    private final static List<Integer> WEEKEND = List.of(1,2,8,9,15,16,22,23,29,30);
-    private final static List<Integer> STAR_DAY = List.of(3,10,17,24,25,31);
     private final int date;
     public BenefitService(int date) {
         this.date = date;
@@ -24,7 +20,8 @@ public class BenefitService {
     }
 
     public int getWeekDayBenefit(OrderMenus menus, int price) {
-        if (WEEKDAY.contains(date) && price > 10000) {
+        if (WEEK_DAY.getDays().contains(date)
+                && price > 10000) {
             return getDeserts(menus);
         }
         return 0;
@@ -36,7 +33,8 @@ public class BenefitService {
     }
 
     public int getWeekEndBenefit(OrderMenus menus, int price) {
-        if (WEEKEND.contains(date) && price > 10000) {
+        if (WEEK_END.getDays().contains(date)
+                && price > 10000) {
             return getMain(menus);
         }
         return 0;
@@ -48,7 +46,8 @@ public class BenefitService {
     }
 
     public int getStarDayBenefit(int price) {
-        if (STAR_DAY.contains(date) && price > 10000)
+        if (STAR_DAY.getDays().contains(date)
+                && price > 10000)
             return 1000;
         return 0;
     }
