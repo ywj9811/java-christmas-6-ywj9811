@@ -5,6 +5,16 @@ import static christmas.view.constant.InputMessage.INPUT_ORDER;
 import static christmas.view.constant.InputMessage.VISIT_DATE;
 
 public class InputView {
+    private InputView() {}
+
+    private static class InputViewHelper {
+        private static final InputView INPUT_VIEW = new InputView();
+    }
+
+    public static InputView getInstance(){
+        return InputViewHelper.INPUT_VIEW;
+    }
+
     public String visitDate() {
         System.out.println(VISIT_DATE.getMessage());
         return readLine();

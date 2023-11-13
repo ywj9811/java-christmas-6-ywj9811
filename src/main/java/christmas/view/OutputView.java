@@ -1,12 +1,20 @@
 package christmas.view;
 
-
-import christmas.domain.Menu;
-import christmas.domain.OrderMenus;
+import christmas.service.InputMenuServiceImpl;
 
 import static christmas.view.constant.OutputMessage.*;
 
 public class OutputView {
+    private OutputView() {}
+
+    private static class OutputViewHelper {
+        private static final OutputView OUTPUT_VIEW = new OutputView();
+    }
+
+    public static OutputView getInstance(){
+        return OutputViewHelper.OUTPUT_VIEW;
+    }
+
     public void greeting() {
         System.out.println(GREETING.getMessage());
     }
