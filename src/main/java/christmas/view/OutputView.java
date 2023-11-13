@@ -2,8 +2,7 @@ package christmas.view;
 
 
 import christmas.domain.Menu;
-
-import java.util.List;
+import christmas.domain.OrderMenus;
 
 import static christmas.view.constant.OutputMessage.*;
 
@@ -16,9 +15,9 @@ public class OutputView {
         System.out.println("12월 " + date + PRE_BENEFITS.getMessage());
     }
 
-    public void orderMenus(List<Menu> menus) {
+    public void orderMenus(OrderMenus menus) {
         System.out.println(ORDERS.getMessage());
-        for (Menu menu : menus) {
+        for (Menu menu : menus.getMenus()) {
             System.out.println(menu.getName() + " " + menu.getAmount()+ "개");
         }
     }

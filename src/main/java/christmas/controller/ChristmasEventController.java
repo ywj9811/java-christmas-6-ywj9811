@@ -1,20 +1,16 @@
 package christmas.controller;
 
-import christmas.domain.Menu;
-import christmas.exception.InvalidTypeException;
-import christmas.exception.OutOfRangeException;
+import christmas.domain.OrderMenus;
 import christmas.service.BenefitService;
 import christmas.service.InputMenuService;
 import christmas.service.PriceService;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
-import java.util.List;
-
 import static christmas.domain.constant.Benefit.*;
+import static christmas.util.Conversion.conversionDate;
 import static christmas.view.constant.OutputFormat.*;
 import static christmas.view.constant.OutputMessage.*;
-import static christmas.view.constant.OutputMessage.STAR_BENEFIT;
 
 public class ChristmasEventController {
     private final OutputView outputView = new OutputView();
@@ -24,18 +20,18 @@ public class ChristmasEventController {
     private PriceService priceService;
     private BenefitService benefitService;
 
-    public void setServices(List<Menu> menus, int date) {
+    public void setServices(OrderMenus menus, int date) {
         priceService = new PriceService(menus);
         benefitService = new BenefitService(date);
     }
 
-    public void getResult(int totalPriceBefore) {
+    public void getResult() {
         int totalBenefits = 0;
         for (int benefitPrice : benefits) {
             totalBenefits += benefitPrice;
         }
 
-        int totalPriceAfter = priceService.getTotalPriceAfter(totalPriceBefore, totalBenefits, benefits[PRESENTATION.getColumn()]);
+        int totalPriceAfter = priceService.getTotalPriceAfter(totalBenefits, benefits[PRESENTATION.getColumn()]);
         outputView.totalBenefit(benefitFormatter(totalBenefits));
         outputView.totalPriceAfter(priceFormatter(totalPriceAfter));
 
@@ -50,9 +46,7 @@ public class ChristmasEventController {
     public int greetingAndInputDate() {
         try {
             String inputDate = inputView.visitDate();
-            int date = changeInteger(inputDate);
-            if (date < 1 || date > 31)
-                throw new OutOfRangeException();
+            int date = conversionDate(inputDate);
             return date;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -60,10 +54,10 @@ public class ChristmasEventController {
         }
     }
 
-    public List<Menu> inputOrders(int date) {
+    public OrderMenus inputOrders(int date) {
         try {
             String orders = inputView.getOrders();
-            List<Menu> menus = inputMenuService.getInputMenus(orders);
+            OrderMenus menus = inputMenuService.getInputMenus(orders);
             outputView.preBenefit(date);
             outputView.orderMenus(menus);
             return menus;
@@ -79,7 +73,7 @@ public class ChristmasEventController {
         return totalPriceBefore;
     }
 
-    public void getBenefits(List<Menu> menus, int totalPriceBefore) {
+    public void getBenefits(OrderMenus menus, int totalPriceBefore) {
         benefits[PRESENTATION.getColumn()] = benefitService.getPresentationBenefit(totalPriceBefore);
         benefits[D_DAY.getColumn()] = benefitService.getD_dayBenefit(totalPriceBefore);
         benefits[WEEKDAY.getColumn()] = benefitService.getWeekDayBenefit(menus, totalPriceBefore);
@@ -105,13 +99,5 @@ public class ChristmasEventController {
         if (sb.isEmpty())
             sb.append(NONE.getMessage());
         return sb.toString();
-    }
-
-    private int changeInteger(String input) {
-        try {
-            return Integer.parseInt(input);
-        }catch (Exception e) {
-            throw new InvalidTypeException();
-        }
     }
 }

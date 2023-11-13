@@ -1,26 +1,21 @@
 package christmas.service;
 
-import christmas.domain.Menu;
-
-import java.util.List;
+import christmas.domain.OrderMenus;
 
 public class PriceService {
-    private final List<Menu> menus;
-    public PriceService(List<Menu> menus) {
+    private final OrderMenus menus;
+    public PriceService(OrderMenus menus) {
         this.menus = menus;
     }
 
     public int getTotalPriceBefore() {
-        int totalPrice = 0;
-        for (Menu menu : menus) {
-            totalPrice += menu.getTotalPrice();
-        }
-        return totalPrice;
+        int totalPriceBefore = menus.getTotalPriceBefore();
+        return totalPriceBefore;
     }
 
 
-    public int getTotalPriceAfter(int totalPrice, int totalBenefit, int presentationBenefit) {
-        return totalPrice - totalBenefit + presentationBenefit;
+    public int getTotalPriceAfter(int totalBenefit, int presentationBenefit) {
+        return menus.getTotalPriceBefore() - totalBenefit + presentationBenefit;
     }
 }
 
