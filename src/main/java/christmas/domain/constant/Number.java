@@ -1,6 +1,8 @@
 package christmas.domain.constant;
 
 public enum Number {
+    MIN_DATE(1),
+    MAX_DATE(31),
     CHRISTMAS(25),
     MIN_PRICE(10000),
     BENEFIT_DATE_START(1000),

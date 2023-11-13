@@ -4,6 +4,9 @@ import christmas.exception.InvalidFormatException;
 import christmas.exception.InvalidTypeException;
 import christmas.exception.OutOfRangeException;
 
+import static christmas.domain.constant.Number.MAX_DATE;
+import static christmas.domain.constant.Number.MIN_DATE;
+
 public class Conversion {
     public static int conversionAmount(String input) {
         try {
@@ -16,7 +19,7 @@ public class Conversion {
     public static int conversionDate(String input) {
         try {
             int date = Integer.parseInt(input);
-            if (date < 1 || date > 31)
+            if (date < MIN_DATE.getNumber() || date > MAX_DATE.getNumber())
                 throw new OutOfRangeException();
             return date;
         } catch (OutOfRangeException e) {
