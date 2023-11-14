@@ -32,6 +32,7 @@ public class InputMenuServiceImpl implements InputMenuService{
             Menu menu = getMenu(inputMenu);
             orderMenus.add(menu);
         }
+        orderMenus.validate();
         return orderMenus;
     }
 

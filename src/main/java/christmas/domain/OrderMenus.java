@@ -4,6 +4,7 @@ import christmas.exception.DuplicatedMenuException;
 import christmas.exception.OnlyBeverageException;
 import christmas.exception.OverCountOfMenuException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static christmas.domain.constant.Layer.*;
@@ -11,9 +12,20 @@ import static christmas.domain.constant.Layer.*;
 public class OrderMenus {
     private final List<Menu> menus;
 
-    public OrderMenus(List<Menu> menus) {
-        this.menus = menus;
-        validateDuplicated();
+    public OrderMenus() {
+        menus = new ArrayList<>();
+    }
+
+    public void add(Menu menu) {
+        for (Menu originMenu : menus) {
+            if (originMenu.getName()
+                    .equals(menu.getName()))
+                throw new DuplicatedMenuException();
+        }
+        menus.add(menu);
+    }
+
+    public void validate() {
         validateOnlyBeverage();
         validateSize();
     }
@@ -56,14 +68,6 @@ public class OrderMenus {
                 return;
         }
         throw new OnlyBeverageException();
-    }
-
-    private void validateDuplicated() {
-        List<Menu> after = menus.stream()
-                .distinct()
-                .toList();
-        if (menus.size() != after.size())
-            throw new DuplicatedMenuException();
     }
 
     private void validateSize() {
