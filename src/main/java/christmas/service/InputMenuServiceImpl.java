@@ -26,30 +26,20 @@ public class InputMenuServiceImpl implements InputMenuService{
 
     @Override
     public OrderMenus getInputMenus(String inputMenus) {
-        List<Menu> menus = new ArrayList<>();
+        OrderMenus orderMenus = new OrderMenus();
         String[] inputMenuDetails = inputMenus.split(COMMA);
         for (String inputMenu : inputMenuDetails) {
             Menu menu = getMenu(inputMenu);
-            menus.add(menu);
+            orderMenus.add(menu);
         }
-        return new OrderMenus(menus);
+        return orderMenus;
     }
 
     private Menu getMenu(String inputMenu) {
         String[] menuDetails = inputMenu.split(DASH);
         String name = menuDetails[0];
         int amount = conversionAmount(menuDetails[1]);
-        MenuInfo menuInfo = getMenuInfo(name);
-        Menu menu = new Menu(menuInfo.getLayer(), menuInfo.getName(), menuInfo.getPrice(), amount);
+        Menu menu = new Menu(name, amount);
         return menu;
-    }
-
-    private MenuInfo getMenuInfo(String name) {
-        MenuInfo[] values = MenuInfo.values();
-        for (MenuInfo menuInfo : values) {
-            if (menuInfo.getName().equals(name))
-                return menuInfo;
-        }
-        throw new InvalidMenuException();
     }
 }
