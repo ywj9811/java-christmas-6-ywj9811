@@ -25,7 +25,7 @@ public class EventPriceController {
 
     public static EventPriceController getInstance(OutputView outputView, PriceService priceService, BenefitService benefitService) {
         if (instance == null)
-            return new EventPriceController(outputView, priceService, benefitService);
+            instance = new EventPriceController(outputView, priceService, benefitService);
         return instance;
     }
 
