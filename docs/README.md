@@ -105,3 +105,66 @@
   - [x] 5천 원 이상: 별
   - [x] 1만 원 이상: 트리
   - [x] 2만 원 이상: 산타
+
+## 파일 구조
+```bash
+├── main
+│   └── java
+│       └── christmas
+│           ├── Application.java
+│           ├── config
+│           │   └── AppConfig.java
+│           ├── controller
+│           │   ├── EventInputController.java
+│           │   └── EventPriceController.java
+│           ├── domain
+│           │   ├── Menu.java
+│           │   ├── OrderMenus.java
+│           │   └── constant
+│           │       ├── Badge.java
+│           │       ├── Benefit.java
+│           │       ├── BenefitDay.java
+│           │       ├── Layer.java
+│           │       ├── MenuInfo.java
+│           │       └── Number.java
+│           ├── exception
+│           │   ├── DuplicatedMenuException.java
+│           │   ├── InvalidFormatException.java
+│           │   ├── InvalidMenuException.java
+│           │   ├── InvalidTypeException.java
+│           │   ├── OnlyBeverageException.java
+│           │   ├── OutOfRangeException.java
+│           │   ├── OverCountOfMenuException.java
+│           │   └── constant
+│           │       └── ExceptionMessage.java
+│           ├── service
+│           │   ├── BenefitService.java
+│           │   ├── BenefitServiceImpl.java
+│           │   ├── InputMenuService.java
+│           │   ├── InputMenuServiceImpl.java
+│           │   ├── PriceService.java
+│           │   └── PriceServiceImpl.java
+│           ├── util
+│           │   └── Conversion.java
+│           └── view
+│               ├── InputView.java
+│               ├── OutputView.java
+│               └── constant
+│                   ├── InputMessage.java
+│                   ├── OutputFormat.java
+│                   ├── OutputMessage.java
+│                   └── Print.java
+└── test
+    └── java
+        └── christmas
+            ├── ApplicationTest.java
+            ├── domain
+            │   ├── MenuTest.java
+            │   └── OrderMenusTest.java
+            ├── service
+            │   ├── BenefitServiceTest.java
+            │   ├── InputMenuServiceTest.java
+            │   └── PriceServiceTest.java
+            └── util
+                └── ConversionTest.java
+```
