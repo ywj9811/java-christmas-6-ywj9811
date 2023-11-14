@@ -16,21 +16,26 @@ import static christmas.domain.constant.MenuInfo.*;
 public class BenefitServiceTest {
     private BenefitService benefitService;
 
-    List<Menu> menus = new ArrayList<>();
+    private List<Menu> menus = new ArrayList<>();
+    private OrderMenus orderMenus;
     @BeforeEach
     void setting() {
-        menus.add( new Menu(CAKE.getLayer(), CAKE.getName(), CAKE.getPrice(), 1));
-        menus.add( new Menu(CHAMPAGNE.getLayer(), CHAMPAGNE.getName(), CHAMPAGNE.getPrice(), 1));
-        menus.add( new Menu(RIB.getLayer(), RIB.getName(), RIB.getPrice(), 1));
-        menus.add( new Menu(SOUP.getLayer(), SOUP.getName(), SOUP.getPrice(), 1));
-        menus.add( new Menu(TAPAS.getLayer(), TAPAS.getName(), TAPAS.getPrice(), 1));
-        menus.add( new Menu(SALAD.getLayer(), SALAD.getName(), SALAD.getPrice(), 1));
-        menus.add( new Menu(T_BONE.getLayer(), T_BONE.getName(), T_BONE.getPrice(), 1));
-        menus.add( new Menu(OCEAN_PASTA.getLayer(), OCEAN_PASTA.getName(), OCEAN_PASTA.getPrice(), 1));
-        menus.add( new Menu(CHRISTMAS_PASTA.getLayer(), CHRISTMAS_PASTA.getName(), CHRISTMAS_PASTA.getPrice(), 1));
-        menus.add( new Menu(ICE_CREAM.getLayer(), ICE_CREAM.getName(), ICE_CREAM.getPrice(), 1));
-        menus.add( new Menu(COLA.getLayer(), COLA.getName(), COLA.getPrice(), 1));
-        menus.add( new Menu(WINE.getLayer(), WINE.getName(), WINE.getPrice(), 1));
+        menus = new ArrayList<>();
+        menus.add(new Menu(CAKE.getName(), 1));
+        menus.add(new Menu(CHAMPAGNE.getName(), 1));
+        menus.add(new Menu(RIB.getName(),1));
+        menus.add(new Menu(SOUP.getName(),1));
+        menus.add(new Menu(TAPAS.getName(), 1));
+        menus.add(new Menu(SALAD.getName(), 1));
+        menus.add(new Menu(T_BONE.getName(), 1));
+        menus.add(new Menu(OCEAN_PASTA.getName(), 1));
+        menus.add(new Menu(CHRISTMAS_PASTA.getName(), 1));
+        menus.add(new Menu(ICE_CREAM.getName(), 1));
+        menus.add(new Menu(COLA.getName(), 1));
+        menus.add(new Menu(WINE.getName(), 1));
+        orderMenus = new OrderMenus();
+        for (Menu menu : menus)
+            orderMenus.add(menu);
     }
 
     @ValueSource(ints = {50000, 40000, 30000})
@@ -78,7 +83,7 @@ public class BenefitServiceTest {
     @DisplayName("평일 혜택 테스트 평일")
     void weekDayBenefitTest(int input) {
         benefitService = BenefitServiceImpl.reset(input);
-        int weekDayBenefit = benefitService.getWeekDayBenefit(new OrderMenus(menus), 50000);
+        int weekDayBenefit = benefitService.getWeekDayBenefit(orderMenus, 50000);
         Assertions.assertThat(weekDayBenefit)
                 .isEqualTo(2023*2);
     }
@@ -88,7 +93,7 @@ public class BenefitServiceTest {
     @DisplayName("평일 혜택 테스트 주말")
     void noneWeekDayBenefitTest(int input) {
         benefitService = BenefitServiceImpl.reset(input);
-        int weekDayBenefit = benefitService.getWeekDayBenefit(new OrderMenus(menus), 50000);
+        int weekDayBenefit = benefitService.getWeekDayBenefit(orderMenus, 50000);
         Assertions.assertThat(weekDayBenefit)
                 .isEqualTo(0);
     }
@@ -98,7 +103,7 @@ public class BenefitServiceTest {
     @DisplayName("평일 혜택 테스트 가격 부족")
     void weekDayBenefitLessPriceTest(int input) {
         benefitService = BenefitServiceImpl.reset(input);
-        int weekDayBenefit = benefitService.getWeekDayBenefit(new OrderMenus(menus), 5000);
+        int weekDayBenefit = benefitService.getWeekDayBenefit(orderMenus, 5000);
         Assertions.assertThat(weekDayBenefit)
                 .isEqualTo(0);
     }
@@ -108,7 +113,7 @@ public class BenefitServiceTest {
     @DisplayName("주말 혜택 테스트 주말")
     void weekEndBenefitTest(int input) {
         benefitService = BenefitServiceImpl.reset(input);
-        int weekEndBenefit = benefitService.getWeekEndBenefit(new OrderMenus(menus), 50000);
+        int weekEndBenefit = benefitService.getWeekEndBenefit(orderMenus, 50000);
         Assertions.assertThat(weekEndBenefit)
                 .isEqualTo(2023*4);
     }
@@ -118,7 +123,7 @@ public class BenefitServiceTest {
     @DisplayName("주말 혜택 테스트 평일")
     void noneWeekEndBenefitTest(int input) {
         benefitService = BenefitServiceImpl.reset(input);
-        int weekEndBenefit = benefitService.getWeekEndBenefit(new OrderMenus(menus), 50000);
+        int weekEndBenefit = benefitService.getWeekEndBenefit(orderMenus, 50000);
         Assertions.assertThat(weekEndBenefit)
                 .isEqualTo(0);
     }
@@ -128,7 +133,7 @@ public class BenefitServiceTest {
     @DisplayName("주말 혜택 테스트 가격 부족")
     void weekEndBenefitLessPriceTest(int input) {
         benefitService = BenefitServiceImpl.reset(input);
-        int weekEndBenefit = benefitService.getWeekEndBenefit(new OrderMenus(menus), 5000);
+        int weekEndBenefit = benefitService.getWeekEndBenefit(orderMenus, 5000);
         Assertions.assertThat(weekEndBenefit)
                 .isEqualTo(0);
     }

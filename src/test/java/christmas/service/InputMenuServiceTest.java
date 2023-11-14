@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class InputMenuServiceTest {
-    InputMenuService inputMenuService = InputMenuServiceImpl.getInstance();
+    private InputMenuService inputMenuService = InputMenuServiceImpl.getInstance();
 
     @Test
     @DisplayName("OrderMenu 테스트")
